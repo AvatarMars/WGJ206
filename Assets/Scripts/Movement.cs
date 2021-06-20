@@ -40,22 +40,22 @@ public class Movement : MonoBehaviour
     {
         if(isGrounded == true)
         {
-            extraJumps = extraJumpValue;
+            extraJumps = extraJumpValue; // reset jumps
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && extraJumps > 0 && isJumping == false)
+        if (Input.GetKeyDown(KeyCode.Space) && extraJumps > 0 && isJumping == false) //start jump and subtract from extra jumps
         {
             isJumping = true;
             jumpTimeCounter = jumpTime;
             extraJumps -= 1;
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && extraJumps <= 0 && isGrounded == true && isJumping == false)
+        else if (Input.GetKeyDown(KeyCode.Space) && extraJumps <= 0 && isGrounded == true && isJumping == false) //jump but don't subtract from extra jumps if on ground
         {
             isJumping = true;
             jumpTimeCounter = jumpTime;
         }
 
-        if(Input.GetKey(KeyCode.Space) && isJumping == true)
+        if(Input.GetKey(KeyCode.Space) && isJumping == true) //hold space to lengthen jump
         {
             if (jumpTimeCounter > 0)
             {
@@ -77,12 +77,12 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundMask);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundMask); //returns true if grounded
 
         moveInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
 
-        if(facingRight == false && moveInput > 0)
+        if(facingRight == false && moveInput > 0) //call flip if moving direction changed
         {
             Flip();
         }
@@ -91,10 +91,10 @@ public class Movement : MonoBehaviour
             Flip();
         }
 
-        Vector3 dir = cam.ScreenToWorldPoint(Input.mousePosition) - heldItem.transform.position;
+        Vector3 dir = cam.ScreenToWorldPoint(Input.mousePosition) - heldItem.transform.position; // get the difference between mouse and item positions, then convert to angle
         dir.Normalize();
         rot = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        heldItem.transform.rotation = Quaternion.AngleAxis(rot, Vector3.forward);
+        heldItem.transform.rotation = Quaternion.AngleAxis(rot, Vector3.forward); // rotate the item
     }
 
     void Flip()

@@ -1038,7 +1038,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4811348866260542}
   - component: {fileID: 212949569995591192}
-  - component: {fileID: 114518099298323860}
   m_Layer: 8
   m_Name: Mantle
   m_TagString: Untagged
@@ -1103,7 +1102,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4110777807767662}
   - component: {fileID: 50860677741524050}
-  - component: {fileID: 114210957352699774}
   - component: {fileID: 724889351}
   m_Layer: 8
   m_Name: Knight
@@ -1306,42 +1304,6 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &114210957352699774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1955738467368006}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9fb48a0013ab2b48a0364fee8450007, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WalkSpeed: 500
-  JumpForce: 600
-  _walk: {fileID: 7400000, guid: 48a9bc6d93ac6fd4d8753274e629bd83, type: 2}
-  _jump: {fileID: 7400000, guid: 7a0b4309b9f09f94e9782d825f3c327f, type: 2}
-  _Legs: {fileID: 111731745846248622}
-  _Blade: {fileID: 4236577781312808}
-  _GroundCast: {fileID: 4616292722033762}
-  cam: {fileID: 1121095712}
-  mirror: 0
-  jumpTime: 0
---- !u!114 &114518099298323860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1757164977911518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12e3d7ba8e572a34ca58a4709b394e4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player: {fileID: 114210957352699774}
-  _offset: 0.05
 --- !u!212 &212103401273222240
 SpriteRenderer:
   m_ObjectHideFlags: 0
