@@ -15,6 +15,16 @@ public class HeroController : MonoBehaviour
     [SerializeField]
     Transform ShootyEnd; //The shooty part of the shooty stick
     [SerializeField]
+    Transform HeroFeet; //For getting the raycast's origin when ground checking
+    [SerializeField]
+    LayerMask GroundCheckLayers;
+    [SerializeField]
+    float GroundCheckDistance;
+    [SerializeField]
+    float FallGravity; //To help fix floatiness
+    [SerializeField]
+    float ExtraGavitySpeed; //The speed which you must fall under before the extra gravity hits
+    [SerializeField]
     GameObject BulletPrefab;
     [SerializeField]
     float ShootCooldown;
@@ -38,11 +48,30 @@ public class HeroController : MonoBehaviour
         movement.x = horizontal * MoveScalar;
         movement.y = heroRB.velocity.y;
         heroRB.velocity = movement;
+
+        RaycastHit2D hit = Physics2D.CircleCast(HeroFeet.position, 0.75f, Vector2.down, GroundCheckDistance, GroundCheckLayers.value);
+
+        if (hit.transform != null)
+        {
+            if (hit.transform.tag == "Ground")
+            {
+                grounded = true;
+            }
+        }
+        else
+            grounded = false;
+
         if (Input.GetButtonDown("Jump") && grounded)
         {
             grounded = false;
             heroRB.AddForce(Vector2.up * JumpPower, ForceMode2D.Impulse); //Yeeeeet!
         }
+
+        if (heroRB.velocity.y < ExtraGavitySpeed) //We have jumped and now we need some extra gravity oomph
+            heroRB.gravityScale = FallGravity;
+        else
+            heroRB.gravityScale = 1.5f;
+
 
         //Set the gun's facing relative to movement's x
         if (movement.x < 0)
@@ -65,15 +94,5 @@ public class HeroController : MonoBehaviour
         }
         if (currentCooldown > 0)
             currentCooldown -= Time.deltaTime;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        { //We have impacted the floor and should halt all upwards velocity and toggle grounded flag
-            grounded = true;
-            heroRB.velocity = new Vector2(heroRB.velocity.x, 0);
-            Debug.Log("Collided with ground object");
-        }
     }
 }
