@@ -89,7 +89,7 @@ public class HeroController : MonoBehaviour
         if (currentCooldown <= 0 && Input.GetButtonDown("Fire1"))
         {
             Bullet bullet = GameObject.Instantiate(BulletPrefab, ShootyEnd.position, Quaternion.identity).GetComponent<Bullet>();
-            bullet.SetDirection(ShootyEnd.right); //Set the bullet to fire in the direction of the gun's facing
+            //bullet.SetDirection(ShootyEnd.right); //Set the bullet to fire in the direction of the gun's facing
             currentCooldown = ShootCooldown;
         }
         if (currentCooldown > 0)
